@@ -1,5 +1,5 @@
-# Year - Academy - Name of the course
+# 2024 - Frontend Masters - Python Fundamentals
 
-Notes for the course "xxx" taught by xxx at xxx.
+Notes for the course "Python Fundamentals" taught by Nina Zakharenko at Frontend Masters.
 
-Month Year.
+September 2024.
