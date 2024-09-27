@@ -1,1 +1,88 @@
-# Notes
+# Notes 🐍
+
+- [Intro](#intro)
+- [Variables and Data Types](#variables-and-data-types)
+  - [Numbers](#numbers)
+  - [Strings](#strings)
+  - [Lists](#lists)
+    - [Methods](#methods)
+- [Functions](#functions)
+
+## Intro
+
+-   REPL (Read-Evaluate-Print-Loop): Interactive shell that allows you to enter Python commands and directly see the results. [Source](https://python.land/introduction-to-python/the-repl).
+-   Errors should be read bottom to top.
+-   `help()`
+-   `#` for comments.
+-   Everything is an object.
+
+## Variables and Data Types
+
+-   **Python is a dynamic language**. We don't need to declare the type of the variable before we store data in them. Just like JS.
+-   PEP8 conventions:
+    -   Lowercase
+    -   No spaces. Words separed by `_`.
+    -   Can't start with a number.
+-   `type(variable_name)` indicates the type of value
+-   `None` means nothing, nonetype.
+-   **`print()`**. Prints some variable out in the terminal. `print("My name is", name)` will print `My name is Manuel` (including the space before the name).
+-   **`dir()`** shows the available methods for something. `dir(int)` will show methods for ints.
+-   **`help()`**. One of int's methods is `real`. We can do `help(int.real)` and that will show some info for us.
+
+### Numbers
+
+-   Types:
+    -   Integers: `0`, `-310`, `0`
+    -   Float: `5.0`, `-342.4`, `0.0`
+    -   Complex: `42j`
+-   We cant create instances of numbers using `int(5)` or `float(3.0)`
+-   `6/2`=`3.0` (result of diving is a float number), `3*3`=`9`
+
+### Strings
+
+-   Can use single (`'`) or double (`"`) quotes. It's considered best practice to use double quote because you may need to put a single quote within your string: `'Hello N's'` will return an error, instead of that is better to type `"Hello N's"`
+-   `+` concatenates strings: `"Nina" + " Z"` will return `"Nina Z"`
+-   **Long strings** can be declared with triple quotes `long_string="""`. That will produce a different prompt in the REPL. `...` instead of `>>>`. That means the REPL is waiting for more input. When its done, we'll write `"""` again and that will be stored in the variable. ![long_string](img/long_string.png). `\n` represents a new line.
+-   **f-string** is a new fancy way of string formatting. ![f_string](img/f_string.png)
+
+```py
+>>> a = float(5)
+>>> type(a)
+<class 'float'>
+>>> a
+5.0
+```
+
+### Lists
+
+-   Lists are used for storing similar items, and in cases where items need to be added or removed.
+-   Should not be named "list".
+-   Can have different variable types inside.
+-   Declared just with `[]` or calling the constructor `list()`. `names=["Nina", "Max", "Jane"]`.
+    -Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`. `names[0]`, `names[1]`... If we ask for an index out of range an error will pop up: `IndexError: list index out of range`.
+-   Items in a lists can be declared line by line. Trailing commas (final commas) on like JSON are allowed. In fact, in Python, they're encouraged because they really help with diffs and version control. ![list items line by line](<img/list-items line by line.png>)
+-   Lists are mutable, meaning they can be changed and updated.
+-   Searching for an item in a large list is slow because each item must be checked.
+
+#### Methods
+
+-   Counting:
+    -   `len(my_list)` returns the length of a list.
+    -   `my_list.count(item)` returns how many times an item appear in the list.
+-   Updating:
+    -   `my_list.append(item)` to add new values
+    -   `my_list.insert(index, item)` to insert an item at `index` position.
+    -   `my_list.pop()` with no arguments will remove the last item and return it (pop it). We can also pass the index as an argument. 
+    -   `my_list.remove(item)` removes an item of the list. If the item appears more than once, it will just removed the first one (the one with the lower index).
+-   Sorting:
+    -   `sorted(my_list, [reverse=true])` can sort items in a list. It doesn't change the original list. ![list sorting methods](<img/list sorting methods.png>)
+    -   `my_list.sort()` does change the order of the original list. ![my_list.sort()](img/my_list.sort.png)
+-   Searching:
+    -   `my_list.index(item)` will return the index of that item. If `names = ["Nina", "Max", "Phillip", "Nina"]` and we type `names.index("Nina")`, despite of "Nina" being twice, Python will just return the index of the first result, `0`.
+    -   `item in my_list`, like `1 in lottery_numbers`. It returns `True` if the item is in the list.
+
+## Functions
+
+-   Functions are define by `def `, then the name, `()` and `:`.
+-   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation.
+-
