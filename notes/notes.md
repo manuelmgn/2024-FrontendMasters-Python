@@ -241,6 +241,7 @@ Lightweight collections used to keep track of related but different items.
 -   Allows us to store key and value pairs.
 -   Dictionaries themselves are mutable, but, just like sets, dictionary keys can only be **immutable types**, because dictionary keys need to be hashable.
 -   Dictionaries allow fast item lookup and fast membership testing. You can quickly say, given a key is this key in my dictionary or not.And that's because the hash of the key is compared with the hash of the keys in the dictionary, don't have to look through it each item in that dictionary and say,are are you the item, are you the item, are you the item that I'm looking for?
+-   Hence lists cannot be dictionary keys, but tuples can.
 
 ## Functions
 
