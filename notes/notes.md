@@ -247,4 +247,8 @@ Lightweight collections used to keep track of related but different items.
 
 -   Functions are define by `def `, then the name, `()` and `:`.
 -   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation.
--
+-   We define dictionaries with `{:}`, but we can create an empty dictionary just with `{}`, as we've seen before.
+    ```py
+    type({"one": 1, "two": 2}) # <class 'dict>
+    
+    ```
