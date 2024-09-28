@@ -1,7 +1,4 @@
-name = "Nina"
-
-def try_change_name():
-    name = "Max"
-    print(f"Name inside the function: {name}")
-
-try_change_name()
+b = False
+if not b:
+    print("Hi!")
+# Hi!

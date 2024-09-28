@@ -17,6 +17,7 @@
   - [Constants](#constants)
 - [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
   - [Boolean Logic](#boolean-logic)
+  - [`if` statements](#if-statements)
   - [Loops](#loops)
 
 ## Intro
@@ -126,7 +127,9 @@ Pretty print is a module included in the Python standard library that prettify p
 -   Should not be named "list".
 -   Can have different variable types inside.
 -   Declared just with `[]` or calling the constructor `list()`. `names=["Nina", "Max", "Jane"]`.
+
     -   Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`.
+
         ```py
         >>> names=["Nina", "Max", "Jane"]
         >>> names[0]
@@ -138,6 +141,7 @@ Pretty print is a module included in the Python standard library that prettify p
         >>> names[-1]
         'Jane'
         ```
+
 -   Items in a lists can be declared line by line. Trailing commas (final commas) on like JSON are allowed. In fact, in Python, they're encouraged because they really help with diffs and version control. ![list items line by line](<img/list-items line by line.png>)
 -   Lists are mutable, meaning they can be changed and updated.
 -   Searching for an item in a large list is slow because each item must be checked.
@@ -420,7 +424,9 @@ Lightweight collections used to keep track of related but different items.
         ```
 
     -   Searching methods:
+
         -   `'value' in dict`:
+
             ```py
             >>> nums = {'one': 1, 'two': 2, 'three': 3}
             >>> 'one' in nums
@@ -506,8 +512,8 @@ print(name)
 
 ### Constants
 
-- A constant is a value that we expect to use several times within our code and don’t expect its value to change.
-- Uppercase, with the words separated by underscores. 
+-   A constant is a value that we expect to use several times within our code and don’t expect its value to change.
+-   Uppercase, with the words separated by underscores.
 
 ```py
 >>> ROOT_API_URL =  "https://api.github.com"
@@ -524,6 +530,120 @@ print(name)
 ### Boolean Logic
 
 -   It allows us to control the execution flow of our program.
+-   `0` is `False`, all other numbers (including negative) are `True`
+-   Empty containers (lists, tuples, sets and dicts) evaluate to `False`.
+-   `None` is `False`.
+-   `True` is `True`, `False` is `False`.
+-   `3<5` is `True`, `3>5` is `False`, `5>=3` is `True`
+-   `bool()` help us evaluate.
+
+    ```py
+    bool(1) # True
+    bool(0) # False
+    bool([]) # False
+    bool([1,2) # True
+    ```
+
+-   In Python we also have `==` and `!=`.
+
+    ```py
+    1 == 1 # True
+    1 != 1 # False
+    ```
+
+-   **Equality VS Identity**. When using `==` with lists (for example), it will check if the contents are equal (equality), but not if both lists are pointing the same variable (identity). This will be done with the `is` keyword. It asks if these point to the same place in memory.
+
+    ```py
+    list1 = [1, 2, 3]
+    list2 = [1, 2, 3]
+    list1 == list2 # True
+
+    list1 is list2 # False
+
+    x = None
+
+    x is None # True
+    [] is none # False
+    x == None # True
+    ```
+
+-   **`and`**, **`or`** and **`not`**.
+
+    ```py
+    a = True
+    b = True
+    c = False
+
+    a and b # True
+    a and c # False
+    a or b # True
+    a or c # True
+    c or c # False
+    not a # False
+    not c # True
+
+    True and (True or False) # True
+
+    [1] and [2]
+    # [1] and [2] are truthy, but it returns [2]
+    # The first one is true, so it returns the 2nd
+
+    [] and {}
+    # []
+
+    [] or [1]
+    # empty list (falsy) vs list with value (truthy)
+    # returns [1]
+
+    [1] or [2]
+    # [1] → returns the first of the both truthies
+
+    [1] and {1}
+    # both are truthy, and we're using and, so it returns the second one, {1}
+
+
+    ```
+
+### `if` statements
+
+-   The only run if the statement is True.
+
+    ```py
+    if []:
+        print("Hi!")
+    # Prints nothing :(
+    ```
+
+-   They can use prior keywords
+
+    ```py
+    b = False
+    if not b:
+        print("Hi!")
+
+    # Hi!
+    ```
+
+-   We should use `==`. It may work, but it's not correct Python syntax.
+
+    ```py
+    # ❌
+    if b == true:
+        print("DONT!")
+
+    bool(3<5) # True
+    3 < 5 == True # False
+    ```
+
+-   We can use `else` to do something if the `if` is not `True`.
+
+    ```py
+    if 5<3:
+        print("Hi!")
+    else:
+        print("Bye!")
+    # Bye!
+    ```
 
 ### Loops
 
