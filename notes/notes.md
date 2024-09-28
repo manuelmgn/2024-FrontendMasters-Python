@@ -1,6 +1,10 @@
 # Notes 🐍
 
 - [Intro](#intro)
+  - [`py` files](#py-files)
+    - [**`*.pyc` files**](#pyc-files)
+  - [Modules](#modules)
+    - [pretty print](#pretty-print)
 - [Variables and Data Types](#variables-and-data-types)
   - [Numbers](#numbers)
   - [Strings](#strings)
@@ -9,7 +13,11 @@
   - [Sets](#sets)
   - [Dictionaries](#dictionaries)
 - [Functions](#functions)
+  - [Scope](#scope)
+  - [Constants](#constants)
 - [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
+  - [Boolean Logic](#boolean-logic)
+  - [Loops](#loops)
 
 ## Intro
 
@@ -19,11 +27,67 @@
 -   `#` for comments.
 -   Everything is an object.
 
+### `py` files
+
+-   Filenames should be _all_ lowercase
+-   Words should be separated with underscores `_`
+-   Filenames should be short.
+-   ✅ Some good example filenames: `apis.py`, `exceptions.py`, `personal_blog.py`
+-   ⛔️ Some bad example filenames: `MYFILE.PY`, `my_apis.py`, `CamelCaseFile.py`, `really_long_over_descriptive_project_file_name.py`
+
+To run a `.py` file: `python filename.py`. In VSC it's good to exit the REPL before.
+
+#### **`*.pyc` files**
+
+For optimization and other reasons, Python code can be compiled to intermediary `.pyc` files.
+
+The good news is you don’t have to worry about them. The bad news is, very occasionally stale versions of these compiled files can cause problems. To safely delete them from the current project directory, run find . -name "\*.pyc" -delete (on linux or macOS).
+
+💡 **git tip**: use a `.gitignore` for Python. If you use git for source control, you’ll want to make sure that these compiled `*.pyc` files are ignored and not added to your repository. The best way to do this is to add the standard `.gitignore` file for Python to your project.
+
+### Modules
+
+#### pretty print
+
+Pretty print is a module included in the Python standard library that prettify prints.
+
+```py
+>>> long_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+>>> long_list
+[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+>>> from pprint import pprint
+>>> pprint(long_list)
+[0,
+ 1,
+ 2,
+ 3,
+ 4,
+ 5,
+ 6,
+ 7,
+ 8,
+ 9,
+ 10,
+ 11,
+ 12,
+ 13,
+ 14,
+ 15,
+ 16,
+ 17,
+ 18,
+ 19,
+ 20,
+ 21,
+ 22,
+ 23]
+```
+
 ## Variables and Data Types
 
 -   **Python is a dynamic language**. We don't need to declare the type of the variable before we store data in them. Just like JS.
 -   PEP8 conventions:
-    -   Lowercase
+    -   Lowercase.
     -   No spaces. Words separated by `_`.
     -   Can't start with a number.
 -   `type(variable_name)` indicates the type of value
@@ -62,7 +126,7 @@
 -   Should not be named "list".
 -   Can have different variable types inside.
 -   Declared just with `[]` or calling the constructor `list()`. `names=["Nina", "Max", "Jane"]`.
-    - Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`.
+    -   Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`.
         ```py
         >>> names=["Nina", "Max", "Jane"]
         >>> names[0]
@@ -195,7 +259,10 @@ Lightweight collections used to keep track of related but different items.
 
     ```py
     my_set = {3, 3, 5}
-    my_set #{3, 5}
+    my_set # {3, 5}
+
+    my_set.add(3) # No error is shown.
+    my_set # {3, 5}
 
     # We can convert a list to a set and remove duplicates
     names = ["Nina", "Nina", "Max"]
@@ -338,7 +405,7 @@ Lightweight collections used to keep track of related but different items.
         # {'Green': ['Spinach', 'Apples']}
         ```
 
-    -   `keys()`, `values()` and `items()`. These methods will returnjust the keys, just the values or both (items) of a dictionary. When we loop over a dictionary, it returns just the keys, so most of the time we will want to call `.items()`.
+    -   `keys()`, `values()` and `items()`. These methods will return just the keys, just the values or both (items) of a dictionary. When we loop over a dictionary, it returns just the keys, so most of the time we will want to call `.items()`.
 
         ```py
         >>> nums = {'one': 1, 'two': 2, 'three': 3}
@@ -364,7 +431,100 @@ Lightweight collections used to keep track of related but different items.
 
 ## Functions
 
+-   Functions help us organize our code in a way that's reusable, and accept arguments and defaults where needed.
 -   Functions are define by `def`, then the name, `()` and `:`.
--   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation.
+-   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation. We're getting errors if `:` or other function's component is missing.
+-   We can pass parameters in different orders and also use default values, as we can see here:
+
+    ```py
+    def hello_world():
+        print("Hello, World!")
+
+    hello_world() # Hello, World!
+
+    def add_numbers(x, y):
+        return x+y
+
+    result = add_numbers(4, 1)
+    print(result) # 5
+    print(add_numbers(4, 2)) # 6
+
+    def add_numbers(x, y, z=200):
+        # z has a default value of 200
+        return x-y+z
+
+    print(add_numbers(1,2)) # 199
+    print(add_numbers(1,2,1)) # 0
+
+    # We can also pass out parameters in a different order
+    print(add_numbers(z=1, y=2, x=10)) # 9
+    ```
+
+-   We shouldn't use mutable types as default arguments. In this case, we'll see that python we'll use the same instance of the list, so it will add new items every time the function is called.
+
+    ```py
+    def do_stuff(my_list=[]):
+        my_list.append("stuff!")
+        return my_list
+
+    print(do_stuff()) # ['stuff!']
+    print(do_stuff()) # ['stuff!', 'stuff!']
+    print(do_stuff()) # ['stuff!', 'stuff!', 'stuff!']
+    ```
+
+    ```py
+    # One possible solution
+    def do_stuff(my_list=None):
+        if my_list == None:
+            my_list = []
+            my_list.append("stuff!")
+        return my_list
+
+    print(do_stuff()) # ['stuff!']
+    print(do_stuff()) # ['stuff!']
+    print(do_stuff()) # ['stuff!']
+    ```
+
+### Scope
+
+If you define a variable inside a function, you wont be able to access it from other places. In general, scope in Python is the same as in other languages.
+
+```py
+name = "Nina"
+
+def try_change_name():
+    name = "Max"
+    print(f"Name inside the function: {name}")
+
+try_change_name()
+# Name inside the function: Max
+
+print(name)
+# Nina
+
+```
+
+### Constants
+
+- A constant is a value that we expect to use several times within our code and don’t expect its value to change.
+- Uppercase, with the words separated by underscores. 
+
+```py
+>>> ROOT_API_URL =  "https://api.github.com"
+>>> def api_search_repos_url():
+...     return f"{ROOT_API_URL}/search/repositories"
+...
+>>> api_search_repos_url()
+'https://api.github.com/search/repositories'
+>>>
+```
 
 ## Boolean Logic, Looping and Control Flow
+
+### Boolean Logic
+
+-   It allows us to control the execution flow of our program.
+
+### Loops
+
+-   Loops let us take action on collections of items.
