@@ -9,6 +9,7 @@
   - [Sets](#sets)
   - [Dictionaries](#dictionaries)
 - [Functions](#functions)
+- [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
 
 ## Intro
 
@@ -61,7 +62,18 @@
 -   Should not be named "list".
 -   Can have different variable types inside.
 -   Declared just with `[]` or calling the constructor `list()`. `names=["Nina", "Max", "Jane"]`.
-    -Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`. `names[0]`, `names[1]`... If we ask for an index out of range an error will pop up: `IndexError: list index out of range`.
+    - Python is zero indexed, to it starts counting in 0. To access some item of the list by its index, we type the name and the index between `[]`.
+        ```py
+        >>> names=["Nina", "Max", "Jane"]
+        >>> names[0]
+        'Nina'
+        >>> names[4]
+        Traceback (most recent call last):
+        File "<stdin>", line 1, in <module>
+        IndexError: list index out of range
+        >>> names[-1]
+        'Jane'
+        ```
 -   Items in a lists can be declared line by line. Trailing commas (final commas) on like JSON are allowed. In fact, in Python, they're encouraged because they really help with diffs and version control. ![list items line by line](<img/list-items line by line.png>)
 -   Lists are mutable, meaning they can be changed and updated.
 -   Searching for an item in a large list is slow because each item must be checked.
@@ -76,12 +88,13 @@
         -   `my_list.insert(index, item)` to insert an item at `index` position.
         -   `my_list.pop()` with no arguments will remove the last item and return it (pop it). We can also pass the index as an argument.
         -   `my_list.remove(item)` removes an item of the list. If the item appears more than once, it will just removed the first one (the one with the lower index).
+        -   `del my_list[index]` will also remove the item with that index, but it's not a recommended method.
     -   Sorting:
 
         -   `sorted(my_list, [reverse=true])` can sort items in a list. It doesn't change the original list.
 
             ```py
-            >>> littery_numbers
+            >>> lottery_numbers
             [1, 4, 1993, 7]
             >>> sorted(lottery_numbers)
             [1, 4, 7, 1993]
@@ -274,17 +287,84 @@ Lightweight collections used to keep track of related but different items.
 
 -   **Fast lookup**. Dictionaries allow fast item lookup and fast membership testing. You can quickly say, given a key is this key in my dictionary or not.And that's because the hash of the key is compared with the hash of the keys in the dictionary, don't have to look through it each item in that dictionary and say,are are you the item, are you the item, are you the item that I'm looking for?
 -   Hence lists cannot be dictionary keys, but tuples can.
--   **Unordered**. Like sets, dictionaries do not have an order.
+-   **Unordered**. Like sets, dictionaries do not have an order. Or kind of sorted: since python 3.6 a dict is sorted by insertion order, however items can't be accessed by index.
 
     ```py
     my_dict = {"one": 1, "two": 2}
     my_dict[0] # KeyError: 0
     my_dict["one"] # 1
+    my_dict["three"] # KeyError: 'three'
     ```
 
--   
+-   We can change values and add newer ones.
+
+    ```py
+    my_dict = {"one": 1, "two": 2}
+    my_dict["two"] = "twotwotwotwo"
+    my_dict["three"] = 3
+    my_dict # {"one": 1, "two": "twotwotwotwo", "three": 3}
+    ```
+
+-   Methods:
+
+    -   `get(item[, default])`. Catch items without returning KeyError. If `get` doesn't find what we're looking for, it returns nothing, and if we use its second optional parameter, it'll return that value.
+
+        ```py
+        my_dict = {"one": 1, "two": 2}
+        my_dict["three"] # KeyError: 'three'
+        my_dict.get("three") # (Nothing is returned)
+        my_dict.get("three", "Ups!") # Ups!
+        my_dict.get("two", "Ups!") # 2
+        ```
+
+    -   `update` can modify a dictionary and merge it with another.
+
+        ```py
+        my_dict = {"one": 1, "two": 2}
+        my_other_dict = {"one": 1, "two": "dois", "three": 3}
+        my_dict.update(my_other_dict)
+        my_dict # {'one': 1, 'two': 'dois', 'three': 3}
+
+        # Now will modify a list inside a dict with append:
+
+        colors = {"Green": ["Spinach"]}
+        vegetables = colors
+        vegetables
+        # {'Green': ['Spinach']}
+        type(vegetables["Green"])
+        # <class 'list'>
+        vegetables["Green"].append("Apples")
+        colors
+        # {'Green': ['Spinach', 'Apples']}
+        ```
+
+    -   `keys()`, `values()` and `items()`. These methods will returnjust the keys, just the values or both (items) of a dictionary. When we loop over a dictionary, it returns just the keys, so most of the time we will want to call `.items()`.
+
+        ```py
+        >>> nums = {'one': 1, 'two': 2, 'three': 3}
+        >>> nums.keys()
+        dict_keys(['one', 'two', 'three'])
+        >>> nums.values()
+        dict_values([1, 2, 3])
+        >>> nums.items()
+        dict_items([('one', 1), ('two', 2), ('three', 3)])
+        >>> nums
+        {'one': 1, 'two': 2, 'three': 3}
+        ```
+
+    -   Searching methods:
+        -   `'value' in dict`:
+            ```py
+            >>> nums = {'one': 1, 'two': 2, 'three': 3}
+            >>> 'one' in nums
+            True
+            >>> 'four' in nums
+            False
+            ```
 
 ## Functions
 
 -   Functions are define by `def`, then the name, `()` and `:`.
 -   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation.
+
+## Boolean Logic, Looping and Control Flow
