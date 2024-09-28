@@ -23,12 +23,12 @@
 -   **Python is a dynamic language**. We don't need to declare the type of the variable before we store data in them. Just like JS.
 -   PEP8 conventions:
     -   Lowercase
-    -   No spaces. Words separed by `_`.
+    -   No spaces. Words separated by `_`.
     -   Can't start with a number.
 -   `type(variable_name)` indicates the type of value
--   `None` means nothing, nonetype.
+-   `None` means nothing, none type.
 -   **`print()`**. Prints some variable out in the terminal. `print("My name is", name)` will print `My name is Manuel` (including the space before the name).
--   **`dir()`** shows the available methods for something. `dir(int)` will show methods for ints.
+-   **`dir()`** shows the available methods for something. `dir(int)` will show methods for integers.
 -   **`help()`**. One of int's methods is `real`. We can do `help(int.real)` and that will show some info for us.
 
 ### Numbers
@@ -67,6 +67,7 @@
 -   Searching for an item in a large list is slow because each item must be checked.
 
 -   Methods
+
     -   Counting:
         -   `len(my_list)` returns the length of a list.
         -   `my_list.count(item)` returns how many times an item appear in the list.
@@ -76,9 +77,32 @@
         -   `my_list.pop()` with no arguments will remove the last item and return it (pop it). We can also pass the index as an argument.
         -   `my_list.remove(item)` removes an item of the list. If the item appears more than once, it will just removed the first one (the one with the lower index).
     -   Sorting:
-        -   `sorted(my_list, [reverse=true])` can sort items in a list. It doesn't change the original list. ![list sorting methods](<img/list sorting methods.png>)
-        -   `my_list.sort()` does change the order of the original list. ![my_list.sort()](img/my_list.sort.png)
+
+        -   `sorted(my_list, [reverse=true])` can sort items in a list. It doesn't change the original list.
+
+            ```py
+            >>> littery_numbers
+            [1, 4, 1993, 7]
+            >>> sorted(lottery_numbers)
+            [1, 4, 7, 1993]
+            >>> lottery_numbers
+            [1, 4, 1993, 7]
+            >>> sorted(lottery_numbers, reverse=True)
+            [1993, 7, 4, 1]
+            >>> lottery_numbers
+            [1, 4, 1993, 7]
+            ```
+
+        -   `my_list.sort()` does change the order of the original list.
+
+            ```py
+            >>> lottery_numbers.sort()
+            >>> lottery_numbers
+            [1, 4, 7, 1993]
+            ```
+
     -   Searching:
+
         -   `my_list.index(item)` will return the index of that item. If `names = ["Nina", "Max", "Phillip", "Nina"]` and we type `names.index("Nina")`, despite of "Nina" being twice, Python will just return the index of the first result, `0`.
         -   `item in my_list`, like `1 in lottery_numbers`. It returns `True` if the item is in the list.
 
@@ -131,12 +155,14 @@ Lightweight collections used to keep track of related but different items.
 
 -   Mutable datatype that allows you to store **immutable** types in an unsorted way.
 -   They only can contain immutable types, so not lists, sets or dictionaries.
+
     ```py
     # Check if type is mutable by using hash()
     hash(5) # 5
     hash("Name") # 51513515315136161
     hash([]) # TypeError: unhashable type: 'list'
     ```
+
 -   Cannot have duplicate values.
 -   Fast
 -   Created using `{}`, but be careful!
@@ -238,17 +264,27 @@ Lightweight collections used to keep track of related but different items.
 
 ### Dictionaries
 
--   Allows us to store key and value pairs.
--   Dictionaries themselves are mutable, but, just like sets, dictionary keys can only be **immutable types**, because dictionary keys need to be hashable.
--   Dictionaries allow fast item lookup and fast membership testing. You can quickly say, given a key is this key in my dictionary or not.And that's because the hash of the key is compared with the hash of the keys in the dictionary, don't have to look through it each item in that dictionary and say,are are you the item, are you the item, are you the item that I'm looking for?
+-   Allows us to **store key and value pairs**.
+-   **Mutable, but!** Dictionaries themselves are mutable, but, just like sets, dictionary keys can only be **immutable types**, because dictionary keys need to be hashable.
+-   We define dictionaries with `{:}`, but we can create an empty dictionary just with `{}`, as we've seen before.
+
+    ```py
+    type({"one": 1, "two": 2}) # <class 'dict>
+    ```
+
+-   **Fast lookup**. Dictionaries allow fast item lookup and fast membership testing. You can quickly say, given a key is this key in my dictionary or not.And that's because the hash of the key is compared with the hash of the keys in the dictionary, don't have to look through it each item in that dictionary and say,are are you the item, are you the item, are you the item that I'm looking for?
 -   Hence lists cannot be dictionary keys, but tuples can.
+-   **Unordered**. Like sets, dictionaries do not have an order.
+
+    ```py
+    my_dict = {"one": 1, "two": 2}
+    my_dict[0] # KeyError: 0
+    my_dict["one"] # 1
+    ```
+
+-   
 
 ## Functions
 
--   Functions are define by `def `, then the name, `()` and `:`.
+-   Functions are define by `def`, then the name, `()` and `:`.
 -   Instead of brackets, like we use in JS, in Python the body of the function is indicated by indentation.
--   We define dictionaries with `{:}`, but we can create an empty dictionary just with `{}`, as we've seen before.
-    ```py
-    type({"one": 1, "two": 2}) # <class 'dict>
-    
-    ```
