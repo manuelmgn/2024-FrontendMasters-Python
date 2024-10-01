@@ -1,24 +1,28 @@
 # Notes 🐍
 
-- [Intro](#intro)
-  - [`py` files](#py-files)
-    - [**`*.pyc` files**](#pyc-files)
-  - [Modules](#modules)
-    - [pretty print](#pretty-print)
-- [Variables and Data Types](#variables-and-data-types)
-  - [Numbers](#numbers)
-  - [Strings](#strings)
-  - [Lists](#lists)
-  - [Tuples](#tuples)
-  - [Sets](#sets)
-  - [Dictionaries](#dictionaries)
-- [Functions](#functions)
-  - [Scope](#scope)
-  - [Constants](#constants)
-- [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
-  - [Boolean Logic](#boolean-logic)
-  - [`if` statements](#if-statements)
-  - [Loops](#loops)
+-   [Intro](#intro)
+    -   [`py` files](#py-files)
+        -   [**`*.pyc` files**](#pyc-files)
+    -   [Modules](#modules)
+        -   [pretty print](#pretty-print)
+-   [Variables and Data Types](#variables-and-data-types)
+    -   [Numbers](#numbers)
+    -   [Strings](#strings)
+    -   [Lists](#lists)
+    -   [Tuples](#tuples)
+    -   [Sets](#sets)
+    -   [Dictionaries](#dictionaries)
+-   [Functions](#functions)
+    -   [Scope](#scope)
+    -   [Constants](#constants)
+-   [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
+    -   [Boolean Logic](#boolean-logic)
+    -   [`if` statements](#if-statements)
+    -   [Loops](#loops)
+        -   [`for`](#for)
+        -   [`while`](#while)
+        -   [`return`](#return)
+        -   [`break` and `continue`](#break-and-continue)
 
 ## Intro
 
@@ -645,6 +649,198 @@ print(name)
     # Bye!
     ```
 
+-   `elif` (else if)
+
+    ```py
+    a = False
+    b = True
+
+    if a:
+        print("1")
+    elif b:
+        print("2")
+    else:
+        print("3")
+
+    # 2
+    ```
+
 ### Loops
 
--   Loops let us take action on collections of items.
+Loops let us take action on collections of items.
+
+#### `for`
+
+-   Syntax: `for single_item in items`
+-   Outside the loop, the variable color still exists. The value of that value will be the last value of the loop:
+
+    ```py
+    colors = ['Red', 'Blue', 'Orange']
+
+    for color in colors:
+        print(f"The color is {color}")
+
+    # The color is Red
+    # The color is Blue
+    # The color is Orange
+
+    # Outside the loop, the variable color still exists.
+    # The value of that value will be the last value of the loop
+    print("outside of the loop", color)
+    # outside of the loop Orange
+    ```
+
+-   `enumerate(variable)` returns a tuple looping over the values of our variable. We could convert it to a list:
+
+    ```py
+    colors = ['Red', 'Blue', 'Orange']
+    list(enumerate(colors))
+    # [(0, 'Red'), (1, 'Blue'), (2, 'Orange')]
+    ```
+
+-   We could take those values and use them in a loop:
+
+    ```py
+    for index, color in enumerate(colors):
+        print(f"{index} color at: {color}")
+
+    # 0 color at: Red
+    # 1 color at: Blue
+    # 2 color at: Orange
+    ```
+
+-   Now let's do it with a dictionary. In this case we'll be using `.items()`. If we use `hex_colors` without `.item()` will face a `ValueError: too many values to unpack`.
+
+    ```py
+    hex_colors = {
+        "Red": "#FF",
+        "Green": "#008",
+        "Blue": "#0000FF",
+    }
+
+    for color in hex_colors:
+        print(f"The value of color is actually: {color}")
+
+    # The value of color is actually: Red
+    # The value of color is actually: Green
+    # The value of color is actually: Blue
+
+    for color, hex_value in hex_colors.items():
+        print(f"For color {color}, the hex value is: {hex_value}")
+
+    # For color Red, the hex value is: #FF0000
+    # For color Green, the hex value is: #008000
+    # For color Blue, the hex value is: #0000FF
+    ```
+
+#### `while`
+
+-   `while`
+
+    ```py
+    val = 0
+    while < 4:
+        print(val)
+        val+= 1
+
+    # 0
+    # 1
+    # 2
+    # 3
+    ```
+
+#### `return`
+
+```py
+def name_length(names):
+    for name in names:
+            print(name)
+            if name == "Nina":
+                    return "Found the special name"
+names = ["Max", "Nina", "Rose"]
+name_length(names)
+
+# Max
+# Nina
+# 'Found the special name'
+```
+
+#### `break` and `continue`
+
+-   `break` completely breaks out of the loop
+
+    ```py
+    names = ["Rose", "Max", "Nina", "Phillip"]
+    for name in names:
+        print(f"Hello, {name}")
+        if name == "Nina":
+            break
+
+    # Hello, Rose
+    # Hello, Max
+    # Hello, Nina
+    ```
+
+-   `continue` continues to the start of the loop
+
+    ```py
+    for name in names:
+    if name != "Nina":
+        continue
+    # Hello, Nina
+    ```
+
+-   Combined example 1:
+
+    ```py
+    # Python file names.py
+    names = ["Jimmy", "Rose", "Max", "Nina", "Phillip"]
+
+    for name in names:
+        if len(name) != 4:
+            continue
+
+        print(f"Hello, {name}")
+
+        if name == "Nina":
+            break
+
+    print("Done!")
+
+    ```
+
+    ![continue vs break](img/loops-continue-break.png)
+
+    ```py
+    # Hello, Rose
+    # Hello, Nina
+    # Done!
+    ```
+
+-   Combined example 2:
+    ```py
+    names = ["Rose", "Max", "Nina"]
+    target_letter = 'x'
+    for name in names:
+        print(f"{name} in outer loop")
+        for char in name:
+                if char == target_letter:
+                    print(f"Found {name} with letter: {target_letter}")
+                    print("breaking out of inner loop")
+                    break
+    # Rose in outer loop
+    # Max in outer loop
+    # Found Max with letter: x
+    # breaking out of inner loop
+    # Nina in outer loop
+    ```
+-   Combined example 3: Be careful that your condition will eventually be met, or else your program will get stuck in an infinite loop. For production use, it’s better to use asynchronous programming.
+
+    ```py
+    count = 0
+    while True:
+        count += 1
+        if count == 5:
+                print("Count reached")
+            break
+    ```
