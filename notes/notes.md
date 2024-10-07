@@ -1,37 +1,37 @@
 # Notes 🐍
 
--   [Intro](#intro)
-    -   [`py` files](#py-files)
--   [Variables and Data Types](#variables-and-data-types)
-    -   [Numbers](#numbers)
-    -   [Strings](#strings)
-    -   [Lists](#lists)
-    -   [Tuples](#tuples)
-    -   [Sets](#sets)
-    -   [Dictionaries](#dictionaries)
--   [Functions](#functions)
-    -   [Scope](#scope)
-    -   [Constants](#constants)
--   [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
-    -   [Boolean Logic](#boolean-logic)
-    -   [`if` statements](#if-statements)
-    -   [Loops](#loops)
--   [Libraries and Modules](#libraries-and-modules)
-    -   [Modules](#modules)
-    -   [External libraries](#external-libraries)
--   [Using Python](#using-python)
-    -   [Debugging](#debugging)
-    -   [`main` Method](#main-method)
-    -   [`try-except`](#try-except)
--   [Object Oriented Python](#object-oriented-python)
--   [Web Frameworks](#web-frameworks)
--   [APIs](#apis)
-    -   [HTTP Methods](#http-methods)
-    -   [Headers, Body and Parameters](#headers-body-and-parameters)
-    -   [Response Types](#response-types)
-    -   [HTTP status Codes](#http-status-codes)
-    -   [`resquests` + APIs](#resquests--apis)
-    -   [Practice: GitHub stars](#practice-github-stars)
+- [Intro](#intro)
+  - [`py` files](#py-files)
+- [Variables and Data Types](#variables-and-data-types)
+  - [Numbers](#numbers)
+  - [Strings](#strings)
+  - [Lists](#lists)
+  - [Tuples](#tuples)
+  - [Sets](#sets)
+  - [Dictionaries](#dictionaries)
+- [Functions](#functions)
+  - [Scope](#scope)
+  - [Constants](#constants)
+- [Boolean Logic, Looping and Control Flow](#boolean-logic-looping-and-control-flow)
+  - [Boolean Logic](#boolean-logic)
+  - [`if` statements](#if-statements)
+  - [Loops](#loops)
+- [Libraries and Modules](#libraries-and-modules)
+  - [Modules](#modules)
+  - [External libraries](#external-libraries)
+- [Using Python](#using-python)
+  - [Debugging](#debugging)
+  - [`main` Method](#main-method)
+  - [`try-except`](#try-except)
+- [Object Oriented Python](#object-oriented-python)
+- [Web Frameworks](#web-frameworks)
+- [APIs](#apis)
+  - [HTTP Methods](#http-methods)
+  - [Headers, Body and Parameters](#headers-body-and-parameters)
+  - [Response Types](#response-types)
+  - [HTTP status Codes](#http-status-codes)
+  - [`requests` + APIs](#requests--apis)
+  - [Practice: GitHub stars](#practice-github-stars)
 
 ## Intro
 
@@ -190,7 +190,7 @@ The good news is you don’t have to worry about them. The bad news is, very occ
 
 List comprehensions are a unique way to create lists in Python. A list comprehension consists of brackets containing an expression followed by a for clause, then zero or more for or if clauses. The expressions can be any kind of Python object.
 
-List comprehensions will commonly take the form of `[<value> for <vars> in <iter>]`. So its recommended to write it backwords, first `[]` because we want a list, then `for <vars> in <iter>` because we know what should be looped, and finally what do exactly want, `<value>`.
+List comprehensions will commonly take the form of `[<value> for <vars> in <iter>]`. So its recommended to write it backwards, first `[]` because we want a list, then `for <vars> in <iter>` because we know what should be looped, and finally what do exactly want, `<value>`.
 
 If we want a list of the length of the names of another list, we'll write: `[len(name) for name in names]`
 
@@ -732,7 +732,7 @@ print(name)
     ```py
     # ❌
     if b == true:
-        print("DONT!")
+        print("DON'T!")
 
     bool(3<5) # True
     3 < 5 == True # False
@@ -1134,7 +1134,7 @@ The HTTP Method (or verb) is how you tell the server which _type_ of operation y
 -   `5xx`: A Server Error
     -   `500 Internal Server Error`: Something went wrong with the server.
 
-### `resquests` + APIs
+### `requests` + APIs
 
 -   Let's use the `requests` library to interact with APIs.
 
