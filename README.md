@@ -4,6 +4,11 @@ Notes for the courses "Python Fundamentals", "Practical Guide to PYthon" and "In
 
 September-October 2024.
 
+## Index
+
+- [Intro and comprehensions](/notes/Intro.md): Intro, Variables and Data Types, Funcions, Boolean Logic, Looping and Control Flow
+
+## Links
 -   [Python Fundamentals](https://frontendmasters.com/courses/python/).
 -   [Practical Guide to Python](https://frontendmasters.com/courses/practical-python/).
 -   [Intermediate Python](https://frontendmasters.com/courses/intermediate-python/).
